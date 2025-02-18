@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: barzhaa-fit-postgres
+    environment:
+      POSTGRES_DB: fit_db
+      POSTGRES_USER: fit_user
+      POSTGRES_PASSWORD: fit_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:latest
+    container_name: barzhaa-fit-redis
+    ports:
+      - "6379:6379"
+
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: barzhaa-fit-rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+volumes:
+  pgdata:
